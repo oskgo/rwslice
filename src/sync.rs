@@ -90,12 +90,19 @@ impl<'a, T> DerefMut for MutSRWBuffer<'a, T> {
 }
 
 // Invariant: We only get shared access to the portion of the buffer before the boundary
-#[derive(Clone, Copy)]
 pub struct RefSRWBuffer<'a, T> {
     boundary: &'a AtomicIsize,
     buffer: *const T,
     _ph: PhantomData<&'a [T]>,
 }
+
+impl<'a, T> Clone for RefSRWBuffer<'a, T> {
+    fn clone(&self) -> Self {
+        *self
+    }
+}
+
+impl<'a, T> Copy for RefSRWBuffer<'a, T> {}
 
 // SAFETY: We only get to see parts of the buffer where no more writes are done
 unsafe impl<'a, T: Sync> Sync for RefSRWBuffer<'a, T> {}
