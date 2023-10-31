@@ -2,6 +2,8 @@
 name = "rwslice"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "An implementation of a datastructure that allows simultaneous writing and reading from a single slice by splitting it in two"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
